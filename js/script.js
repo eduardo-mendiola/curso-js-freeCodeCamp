@@ -370,7 +370,7 @@ console.log(conteoDeCartasGpt('K'));
 // Ej:
 
 let myDog = {
-  "name": "Apolo",
+  "name": "Apolo", // <= propiedad-valor, clave-valor y key-value se refiere a lo mismo ("key": "value",)
   "age": 9,
   "weight": 6,
   "breed": "mutt"
@@ -424,7 +424,7 @@ console.log(backPack.color); // black
 
 // Agregar valor a un array
 console.log(backPack.content);
-backPack.content.push = "pencil"; //Agregue un elemento al array
+backPack.content.push("pencil"); //Agregue un elemento al array
 console.log(backPack.content) 
 
 // Agregar una propiedad nueva
@@ -437,3 +437,263 @@ delete backPack.weight; // Se elimino la propiedad weight
 console.log(backPack.weight); // undefined
 
 // Objeto para busquedas
+/* Con los objetos podemos tener código más conciso en algunas ocaciones, para asociar propiedades con valores, por ejemplo en comparación con switch. Ejemplo: */
+
+//Código de busqueda con switch
+function searchChemicalElement(symbol){
+  let chemicalElement = "";
+  switch(symbol){
+    case "Al": 
+      chemicalElement = "Aluminium";
+      break;
+    case "S":
+      chemicalElement = "Sulfur";
+      break;
+    case "Cl":
+      chemicalElement = "Chlorine";
+      break;
+    case "He":
+      chemicalElement = "Helium"
+      break;
+    case "B":
+      chemicalElement = "Boron";
+      break;
+    case "Li":
+      chemicalElement = "Lithium";
+      break;
+  }
+  return chemicalElement;
+}
+console.log(searchChemicalElement("B"));
+
+// Código de busqueda con objetos
+function searchChemicalElementObj(symbol){
+  let symbolElement = {
+    "Al": "Aluminium",
+    "S": "Sulfur",
+    "Cl": "Clorine",
+    "He": "Helium",
+    "B": "Boron",
+    "Li": "Lithium"
+  };
+  return symbolElement[symbol];
+}
+console.log(searchChemicalElementObj("B"));
+
+// Verificar si existe una propiedad
+// myVariable.hasOwnProperty("property");
+// Ej. de uso en una condicional.
+function verifyProperty(obj, property){
+  if (obj.hasOwnProperty(property)){
+    return "Property: " + obj[property];
+  } else {
+    return "The objet doesn't have this property"
+  }
+}
+
+console.log(verifyProperty(backPack, "size"));
+console.log(verifyProperty(backPack, "material"));
+
+// Objetos complejos
+/* Un objeto complejo en programación es una estructura de datos que puede contener varias propiedades con valores de diferentes tipos de datos, incluyendo otros objetos, matrices, números, cadenas y valores booleanos. Estos objetos son "complejos" porque pueden tener una estructura anidada y pueden contener una gran cantidad de información.
+
+JSON (JavaScript Object Notation) es un formato de intercambio de datos que utiliza una sintaxis similar a la de los objetos en JavaScript. Se utiliza comúnmente para enviar datos entre un servidor y un cliente, y es fácilmente legible tanto por humanos como por máquinas. Los objetos complejos en JSON se representan como una colección de pares de clave-valor, donde cada clave representa el nombre de una propiedad y el valor puede ser cualquier tipo de datos válido en JSON, incluso otro objeto complejo o una matriz. */
+// Ej.:
+var pizzas = [
+  {
+    type: "Pepperoni",
+    size: "Large",
+    price: 12.99,
+    ingredients: ["Pepperoni", "Mozzarella", "Tomato sauce"],
+    takeAway: false
+  },
+  {
+    type: "Margherita",
+    size: "Medium",
+    price: 9.99,
+    ingredients: ["Mozzarella", "Tomatoes", "Basil"],
+    takeAway: true
+  },
+  {
+    type: "Hawaiian",
+    size: "Large",
+    price: 14.99,
+    ingredients: ["Ham", "Pineapple", "Mozzarella", "Tomato sauce"],
+    takeAway: false
+  },
+  {
+    type: "Meat lovers",
+    size: "Extra large",
+    price: 18.99,
+    ingredients: ["Pepperoni", "Sausage", "Bacon", "Mozzarella", "Tomato sauce"],
+    takeAway: true
+  }
+];
+
+// Para acceder al objeto usamos su index [], y a sus clave-valor con notación de punto o de corchetes.
+console.log(pizzas[2]);
+console.log(pizzas[2].ingredients);
+console.log(pizzas[2]["price"]);
+
+/* Objetos anidados
+
+Los objetos anidados son objetos que están dentro de otros objetos. En otras palabras, los objetos anidados son un conjunto de objetos que están organizados de manera jerárquica, con objetos internos que se relacionan con objetos externos.
+
+En la programación, los objetos anidados son útiles para representar relaciones complejas entre entidades. Por ejemplo, en una aplicación de una tienda en línea, podemos tener un objeto "pedido" que contiene objetos "producto" anidados que representan los productos que se han pedido. A su vez, cada objeto "producto" puede contener información sobre su nombre, descripción, precio y otra información relevante.
+
+Los objetos anidados son comunes en el formato JSON, donde se pueden representar estructuras de datos complejas. Al anidar objetos dentro de otros objetos, podemos organizar y estructurar la información de manera lógica y fácilmente accesible.
+*/
+// Ej:
+
+// Nota: si las keys no tienen caracteres especiales o palabras separadas no son necesario las comillas
+let myRecipe = {
+  description: "Delicious Pizza Recipe", 
+  cost: 15.99,
+  ingredients: {
+    crust: {
+      type: "thin",
+      size: "medium",
+      flour: "wheat",
+      water: "filtered",
+      yeast: "active dry",
+      sugar: "brown",
+      salt: "kosher",
+    },
+    toppings: {
+      sauce: "tomato",
+      cheese: "mozzarella",
+      vegetables: ["mushrooms", "onions", "green peppers"],
+      meat: "pepperoni",
+    },
+    filling: {
+      type: "classic",
+      ingredients: ["mozzarella cheese", "pepperoni", "mushrooms", "onions"],
+    },
+  },
+};
+
+// Para acceder a los objetos anidados y sus propiedades hay que seguir la lógica en formato arbol y usar las notaciones de punto o corchete, o la combinación de ambas. 
+
+console.log(myRecipe.ingredients.crust.flour);
+// También usando notación de corchetes
+console.log(myRecipe["ingredients"]["crust"]["flour"]);
+// Combinado
+console.log(myRecipe.ingredients.crust["flour"]);
+console.log(myRecipe.ingredients["crust"].flour);
+/* La notación de corchetes es muy util por si queremos cambiar la clave por una variable. */
+
+/* Arreglos anidados
+Los arrays anidados son una estructura de datos que permiten almacenar múltiples elementos dentro de un solo array. En lugar de tener un solo nivel de elementos, un array anidado tiene uno o más niveles de elementos dentro de él.
+
+Cada nivel de un array anidado se puede acceder utilizando una serie de índices, donde cada índice representa el nivel del array que se desea acceder. Por ejemplo, si tenemos un array anidado de dos niveles, podríamos acceder a un elemento específico utilizando dos índices: el primero para indicar la posición del elemento en el primer nivel del array, y el segundo para indicar la posición del elemento en el segundo nivel.
+
+Los arrays anidados pueden ser útiles para organizar y manipular datos complejos, como matrices de datos multidimensionales. También son comunes en la programación de juegos y en la manipulación de imágenes y otros tipos de datos gráficos.
+
+Es importante tener en cuenta que los arrays anidados pueden ser más complicados de manejar que los arrays simples, y que el acceso a elementos en niveles profundos puede ser menos eficiente en términos de rendimiento. Por lo tanto, se debe tener cuidado al diseñar y utilizar arrays anidados para asegurarse de que sean la estructura de datos adecuada para la tarea en cuestión.
+*/
+// Ejemplo:
+
+const people = [
+  {
+    name: "Juan",
+    age: 25,
+    hobbies: ["football", "reading", "music"],
+  },
+  {
+    name: "Maria",
+    age: 30,
+    hobbies: ["painting", "movies", "traveling"],
+  },
+  {
+    name: "Pedro",
+    age: 20,
+    hobbies: ["video games", "programming", "swimming"],
+  },
+];
+/* Para obtener un valor, tenemos que igresar a los elementos del array con sus indices, luego a las keys el index del valor */
+console.log(people[0].hobbies[1]); // Output: "reading"
+
+/* Ejercicio
+Tenemos un objeto que representa parte de una colección de álbunes musicales.
+
+Cada álbum tiene un número de identificación único (id) asociado a otras propiedades.
+
+No todos los álbumes tienen la información completa.
+*/
+let colleccionDeDiscos = {
+  7853: {
+    tituloDelAlbum: "Bee Gees Greatest",
+    artista: "Bee Gees",
+    canciones: ["Stayin' Alive"]
+  },
+  5439: {
+    tituloDelAlbum: "ABBA Gold"
+  }
+};
+/* Define una función actualizarDiscos que tome los siguientes parámetros:
+- discos (el objeto que representa la colección de dicos).
+- id.
+- propiedad ("artista" o "canciones").
+- valor.
+
+Tu meta es completar la función implementando las siguientes reglas para modificar el objeto pasado a la función:
+
+- Si "valor"  es una cadena vacía, elimina la propiedad del álbum correspondiente.
+
+- Si "propiedad" es igual a la cadena de caracteres "canciones" pero el álbum no tiene una propiedad llamada "canciones", crea un arreglo vacío y agrega "valor" a ese arreglo.
+
+- Si "propiedad" es igual a la cadena de caracteres "canciones" y "valor" no es una cadena vacía, agrega "valor" al final del arreglo de canciones del álbum correspondiente.
+
+- Si "valor" no es una cadena vacía y "propiedad" no es igual a "canciones", asigna el valor del parámetro "valor" a la propiedad. Si la propiedad no existe, debes crearla y asignar este valor.
+ */
+
+function actualizarDiscos(discos, id, propiedad, valor){
+  if (valor === ""){
+    delete discos[id][propiedad]; // Usamos notación de corchetes porque son variables
+  }else if (propiedad === "canciones"){
+    discos[id][propiedad] = discos[id][propiedad] || []; // Operador de fusión nula (null coalescing operator)
+    discos[id][propiedad].push(valor);
+  } else {
+    discos[id][propiedad] = valor;
+  }
+}
+
+// Prueba de la primer condición
+console.log(colleccionDeDiscos[7853].tituloDelAlbum);
+
+actualizarDiscos(colleccionDeDiscos, 7853, "tituloDelAlbum", "");
+
+console.log(colleccionDeDiscos[7853].tituloDelAlbum);
+
+// Prueba de la segunda condición
+console.log(colleccionDeDiscos[5439].canciones);
+
+actualizarDiscos(colleccionDeDiscos, 5439, "canciones", "Mamma Mia");
+
+console.log(colleccionDeDiscos[5439].canciones);
+
+// Prueba de artista
+console.log(colleccionDeDiscos[5439].artista);
+
+actualizarDiscos(colleccionDeDiscos, 5439, "artista", "ABBA");
+
+console.log(colleccionDeDiscos[5439].artista)
+
+/* El operador de fusión nula (null coalescing operator) es un operador que se utiliza en programación para proporcionar un valor predeterminado cuando un valor es nulo o indefinido. Su sintaxis es ??.
+
+En otras palabras, el operador de fusión nula permite definir un valor por defecto para una variable en caso de que esta sea nula o indefinida.
+
+Por ejemplo, considera el siguiente código:
+
+  const nombre = nombreUsuario ?? "Usuario Anónimo";
+
+En este ejemplo, la variable nombre se establece en "Usuario Anónimo" si la variable nombreUsuario es nula o indefinida. De lo contrario, la variable nombre se establecerá en el valor de nombreUsuario.
+
+El operador de fusión nula es útil para proporcionar valores predeterminados cuando se trabaja con datos que pueden ser nulos o indefinidos, como variables que obtienen su valor de una API o una base de datos.
+
+Es importante tener en cuenta que el operador de fusión nula solo verifica si el valor es nulo o indefinido, no si es falso, cero o una cadena vacía. Para verificar también estos casos, se puede usar el operador lógico OR (||). Por ejemplo:
+
+
+  const nombre = nombreUsuario || "Usuario Anónimo";
+
+En este caso, si nombreUsuario es nulo, indefinido, falso, cero o una cadena vacía, la variable nombre se establecerá en "Usuario Anónimo". De lo contrario, la variable nombre se establecerá en el valor de nombreUsuario. */
