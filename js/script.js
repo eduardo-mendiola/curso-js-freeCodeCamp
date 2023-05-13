@@ -697,3 +697,48 @@ Es importante tener en cuenta que el operador de fusión nula solo verifica si e
   const nombre = nombreUsuario || "Usuario Anónimo";
 
 En este caso, si nombreUsuario es nulo, indefinido, falso, cero o una cadena vacía, la variable nombre se establecerá en "Usuario Anónimo". De lo contrario, la variable nombre se establecerá en el valor de nombreUsuario. */
+
+/* While loops
+
+Un ciclo while es una estructura de control de flujo en la programación que repite un bloque de código mientras una condición especificada se evalúa como verdadera. Es decir, el código dentro del ciclo se ejecutará repetidamente hasta que la condición de salida sea falsa. Si la condición de salida es verdadera al principio, entonces el código dentro del ciclo nunca se ejecutará. Es importante tener cuidado al usar un ciclo while, ya que una condición mal definida puede resultar en un ciclo infinito que puede bloquear el programa.
+
+*/
+// Ej:
+let i = 0;
+while (i <= 3){
+  console.log('Hello World');
+  i++;
+}
+// En una función
+let hi = 0;
+function sayHi(times){
+  while (hi < times){
+    console.log('Hello world, this is the function sayHi.😉');
+    hi++;
+  }
+}
+sayHi(5);
+
+// En una función para agregar elementos a un array
+let numbersArray = []
+function addNumbersToArray(array, numbers){
+  let i = 0;
+  while (i<numbers){
+    array.push(i);
+    i++;
+  }
+  console.log(array);
+}
+addNumbersToArray(numbersArray, 10);
+
+// Restar numeros de un array
+function subtractNumbersFromArray(array, quantity){
+  while(array.length > quantity){
+    array.pop();
+  }
+  console.log(array);
+}
+subtractNumbersFromArray(numbersArray, 5);
+
+
+
