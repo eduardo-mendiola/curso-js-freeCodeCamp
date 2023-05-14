@@ -740,5 +740,307 @@ function subtractNumbersFromArray(array, quantity){
 }
 subtractNumbersFromArray(numbersArray, 5);
 
+/* for loop - Ciclo for
+
+El ciclo for es otra estructura de control de flujo en JavaScript que se utiliza para repetir una serie de acciones un número específico de veces. La sintaxis básica del ciclo for es la siguiente:
+
+for (inicialización; condición; incremento o decremento) {
+  // acciones a realizar en cada iteración
+}
+
+Donde:
+- La "inicialización" es la asignación de un valor inicial al contador del ciclo.
+- La "condición" es la expresión booleana que se evalúa antes de cada iteración. Si es verdadera, se ejecutan las acciones dentro del ciclo; si es falsa, el ciclo termina.
+- El "incremento o decremento" es la operación que se realiza después de cada iteración para modificar el valor del contador y avanzar o retroceder en el ciclo.
+
+Aquí te dejo un ejemplo básico:
+
+for (let i = 0; i < 5; i++) {
+  console.log("El valor de i es " + i);
+}
+
+En este ejemplo, se inicializa la variable `i` con un valor de `0`. Luego se verifica si `i` es menor que `5`. Si es así, se ejecutan las acciones dentro del ciclo, que en este caso solo consisten en imprimir el valor de `i`. Después de cada iteración, se incrementa el valor de `i` en `1`. El ciclo se repite hasta que `i` sea igual a `5`, momento en el que la condición es falsa y el ciclo termina.
+*/
 
 
+function numbersCounter(quantity) {
+  let result = '';
+  for (let i = 0; i < quantity; i++) {
+    result += `${i} + ${i + 1} = ${i + 2}\n`;// Va concatenando al string los resultados
+  }
+  return result;
+}
+console.log(numbersCounter(5));
+
+// Agregar numeros en un array
+let arrayFor = [];
+arrayFor.name = "arrayFor";
+
+function addNumbersToArrayFor(array, quantity){
+  
+  for (i = 0; i < quantity; i++){
+    array.push(i);
+  }
+  return `Este es el contenido del ${array.name}: ${array}`;
+}
+console.log(arrayFor);
+console.log(addNumbersToArrayFor(arrayFor, 10));
+
+/* pero no entiendo porque este codigo funciona:
+let arrayFor = [];
+arrayFor.name = "arrayFor";
+
+function addNumbersToArrayFor(array, quantity){
+  
+  for (i = 0; i < quantity; i++){
+    array.push(i);
+  }
+  return `Este es el contenido del ${array.name}: ${array}`;
+}
+console.log(arrayFor);
+console.log(addNumbersToArrayFor(arrayFor, 10));
+
+y este otro no:
+
+let arrayFor = [{name : "arrayFor"}];
+function addNumbersToArrayFor(array, quantity){
+  
+  for (i = 0; i < quantity; i++){
+    array.push(i);
+  }
+  return `Este es el contenido del ${array.name}: ${array}`;
+}
+console.log(arrayFor);
+console.log(addNumbersToArrayFor(arrayFor, 10));
+Al fin y al cabo el array es lo mismo, un array con una propiedad llamada name
+
+ChatGPT
+
+Ambos códigos son correctos, y la única diferencia es cómo se agrega la propiedad al array. En el primer código, la propiedad se agrega después de la creación del array, mientras que en el segundo código se agrega durante la creación del array.
+
+El primer código crea un array vacío let arrayFor = [], y luego agrega una propiedad name a ese array arrayFor.name = "arrayFor". Luego se llama a la función addNumbersToArrayFor con el array modificado y se agrega contenido al array.
+
+El segundo código crea un array con una propiedad name ya incluida en la creación del array let arrayFor = [{name : "arrayFor"}]. Luego se llama a la función addNumbersToArrayFor con el array ya con su propiedad name incluida y se agrega contenido al array.
+
+Ambos códigos dan el mismo resultado en términos del contenido del array y la propiedad name. La única diferencia es la forma en que se agrega la propiedad name al array. */
+
+// Ej. Agregar numeros pares a array, del 2 al 26.
+let evenNumbersArray = [];
+for (let i = 2; i <= 26; i += 2){
+  evenNumbersArray.push(i);
+}
+console.log(evenNumbersArray);
+
+// Ej. Contar hacia atras.
+let countdownArray = [];
+for (let i = 10; i >= 0; i--){
+  countdownArray.push(i);
+}
+console.log(countdownArray);
+
+/* Iterar sobre un array con for loop
+
+Iterar sobre un array con un bucle for es una forma de recorrer cada elemento de un array en JavaScript. Un bucle for se utiliza para repetir una tarea varias veces, y en el contexto de iterar sobre un array, se utiliza para ejecutar un bloque de código para cada elemento del array. 
+
+La estructura básica de un bucle for para iterar sobre un array es la siguiente:
+
+for (let i = 0; i < array.length; i++) {
+  // código a ejecutar para cada elemento del array
+}
+
+En esta estructura, `i` es un índice que se utiliza para acceder a cada elemento del array. `i` se inicializa en 0 y se incrementa en cada iteración del bucle hasta que llega al último índice del array (`array.length - 1`).
+
+Dentro del bucle for, se puede acceder a cada elemento del array utilizando el índice `i`, como en el siguiente ejemplo:
+
+let array = ["a", "b", "c", "d"];
+
+for (let i = 0; i < array.length; i++) {
+  console.log(array[i]);
+}
+
+En este ejemplo, el código dentro del bucle for (`console.log(array[i])`) se ejecutará una vez para cada elemento del array, imprimiendo en la consola "a", "b", "c" y "d".
+
+Un resumen sobre cómo realizar una iteración sobre un array usando el bucle for en JavaScript:
+
+1. Declarar un array con elementos: Primero, debes crear un array en el que se puedan almacenar los elementos que deseas iterar. Puedes hacer esto declarando una variable y asignándole un array vacío o uno que ya tenga elementos.
+
+2. Definir el bucle for: A continuación, es necesario establecer un bucle for que recorra el array. El bucle for tendrá una variable de contador que comienza en cero y se incrementa con cada iteración.
+
+3. Acceder a cada elemento del array: Dentro del cuerpo del bucle for, puedes acceder a cada elemento del array usando el nombre de la variable del array seguido de corchetes y el índice del elemento al que se desea acceder. El índice del primer elemento es 0.
+
+4. Realizar alguna operación con cada elemento: Puedes realizar alguna operación en cada elemento del array dentro del cuerpo del bucle for, como imprimir su valor, modificar su valor o realizar algún cálculo con él.
+
+5. Finalizar la iteración: Cuando el contador del bucle for alcanza la longitud del array, la iteración finaliza.
+
+6. Ejecutar el código: Finalmente, puedes ejecutar el código y ver los resultados de la iteración en la consola del navegador o en un entorno de desarrollo.
+*/
+
+// Ejemplo 1
+let total = 0;
+for (let i = 0; i < arrayFor.length; i++) {
+  total += arrayFor[i];
+}
+console.log(total);
+/* observaciones:
+
+- Ejemplo 1: el código parece correcto para sumar los elementos del array. Es importante recordar inicializar la variable `total` en 0 antes del bucle for para evitar resultados incorrectos. */
+
+// Ejemplo 2 - Con string y toUpperCase()
+let programmingLanguages = ["JavaScript", "Python", "Java", "C++"];
+for (let i = 0; i < programmingLanguages.length; i++) {
+  console.log(programmingLanguages[i].toUpperCase());
+}
+
+/* - Ejemplo 2: también se ve bien, la función `toUpperCase()` funciona para convertir a mayúscula cada cadena en el array. Una sugerencia sería guardar los resultados en otro array si necesitas usarlos más tarde. */
+
+// Ejemplo 3 - Contador de numeros pares dentro de una función
+let evenNumbersTotal = 0;
+function evenNumbersCount(array) {
+  for(let i = 0; i < array.length; i++) {
+    if (array[i] % 2 === 0){
+      evenNumbersTotal++;
+    }
+  }
+  return evenNumbersTotal;
+}
+console.log(evenNumbersCount(arrayFor));
+
+// Contador impares
+let oddNumbersTotal = 0;
+function oddNumbersCount(array) {
+  for(let i = 0; i < array.length; i++) {
+    if (array[i] % 2 !== 0){
+      oddNumbersTotal++;
+    }
+  }
+  return oddNumbersTotal;
+}
+console.log(oddNumbersCount(arrayFor));
+
+/* - Ejemplo 3 y 4: ambos códigos para contar números pares e impares parecen correctos. Solo asegúrate de inicializar las variables `evenNumbersTotal`, `oddNumbersTotal`, `evenNumbersTotalTwo`, y `oddNumbersToralTwo` en 0 antes del bucle for. */
+
+// Lo mismo pero en usa sola funcion
+let evenNumbersTotalTwo = 0;
+let oddNumbersToralTwo = 0;
+function evenAndOddNumbers(array){
+  for (let i = 0; i < array.length; i++){
+    if (array[i] % 2 === 0){
+      evenNumbersTotalTwo++;
+    } else {
+      oddNumbersToralTwo++;
+    }
+  }
+  return `Even numbers total: ${evenNumbersTotalTwo}\nOdd numbers total: ${oddNumbersToralTwo}`;
+}
+console.log(evenAndOddNumbers(arrayFor));
+
+/* 
+- Ejemplo 5: la función `evenAndOddNumbers` es una forma muy buena y eficiente de contar tanto números pares como impares en una sola función. */
+
+/* Ciclos for anidados - Nested for loops -
+
+Claro, los loops for anidados son una forma de iterar sobre múltiples matrices o conjuntos de datos de varias dimensiones. Básicamente, un loop for anidado es un loop dentro de otro loop.
+
+Cada iteración del loop exterior ejecutará todas las iteraciones del loop interior, y así sucesivamente. Esto puede ser útil para trabajar con matrices multidimensionales, matrices de objetos y otras estructuras de datos más complejas.
+
+En términos generales, el código para un loop for anidado se ve así:
+
+for (let i = 0; i < array.length; i++) {
+  for (let j = 0; j < nestedArray.length; j++) {
+    // Código a ejecutar
+  }
+}
+
+Aquí, el loop exterior itera a través de una matriz llamada `array`, y el loop interior itera a través de una matriz anidada llamada `nestedArray`. El código dentro de ambos loops se ejecuta en cada iteración, lo que permite trabajar con los elementos de ambas matrices al mismo tiempo.
+
+Es importante tener en cuenta que los loops for anidados pueden ser menos eficientes que otras formas de iteración, especialmente en grandes conjuntos de datos. Sin embargo, cuando se usan adecuadamente, pueden ser una herramienta poderosa para trabajar con estructuras de datos complejas.
+
+En programación "nested" se utiliza para referirse a estructuras anidadas, como por ejemplo, bucles o estructuras de control dentro de otros bucles o estructuras de control. En el contexto de los bucles for, se puede usar "nested for loops" para describir bucles for anidados.
+*/
+
+// Ejemplo:
+let arrayNumbers = [[5,22,8], [42,7,15], [0,55,20]];
+for (let i = 0; i < arrayNumbers.length; i++){
+  console.log(`Valor del indice: ${i}`)
+  let nestedArray = arrayNumbers[i];
+  for (let j = 0; j < nestedArray.length; j++){
+    console.log(`Elemento: ${nestedArray[j]}`);
+  }
+}
+
+/* Los objetos y sus propiedades también se pueden iterar con un bucle for. Puedes usar un bucle for-in para iterar sobre las propiedades de un objeto. Este tipo de bucle se utiliza para recorrer todas las propiedades enumerables de un objeto, es decir, aquellas que se pueden recorrer con un bucle for.
+
+Aquí te dejo un ejemplo de cómo iterar sobre las propiedades de un objeto con un bucle for-in:
+*/
+let person = {name: "John", age: 30, gender: "male"};
+
+for(let property in person) {
+  console.log(property + ": " + person[property]);
+}
+/*
+En este ejemplo, estamos recorriendo todas las propiedades del objeto "person" y mostrando su nombre y valor en la consola. El resultado sería:
+
+name: John
+age: 30
+gender: male
+*/
+
+/* Ciclo do while
+
+El ciclo `do while` es similar al ciclo `while`, pero con una diferencia importante: la condición de iteración se evalúa al final del bloque de código, en lugar de al principio. Esto significa que el bloque de código se ejecutará al menos una vez, independientemente de si la condición es verdadera o falsa.
+
+El ciclo `do while` consta de la siguiente estructura:
+
+do {
+  // Código a ejecutar
+} while (condición);
+
+Primero se ejecuta el bloque de código y luego se evalúa la condición. Si la condición es verdadera, el bloque de código se ejecuta nuevamente. Este proceso se repite hasta que la condición sea falsa.
+
+El ciclo `do while` se utiliza cuando se necesita que el bloque de código se ejecute al menos una vez, independientemente de si la condición es verdadera o falsa. Por ejemplo, se puede usar para solicitar al usuario que ingrese una entrada y luego repetir la solicitud hasta que la entrada sea válida.
+
+Es importante tener en cuenta que, debido a que la condición se evalúa al final del bloque de código, el ciclo `do while` puede ejecutar el bloque de código una o más veces de lo que se espera si la condición no se establece correctamente.
+*/
+// Ejemplo:
+let x = 16;
+do{
+  console.log(x);
+  x++;
+} while (x < 18);
+
+
+//Ejercicio practico
+/* Buscar un contacto de la lista de contactos con un ciclo for. Definir una función que nos permita conseguir una propiedad de un contacto si la propiedad existe, la busqueda es a travez de su nombre.*/
+
+let contactList = [
+  {
+    firstName: "John",
+    lastName: "Doe",
+    phoneNumber: "123-456-7890",
+    likes: ["hiking", "reading", "baking"]
+  },
+  {
+    firstName: "Mary",
+    lastName: "Smith",
+    phoneNumber: "555-555-1212",
+    likes: ["yoga", "swimming", "traveling"]
+  },
+  {
+    firstName: "David",
+    lastName: "Lee",
+    phoneNumber: "987-654-3210",
+    likes: ["playing guitar", "cooking", "watching movies"]
+  },
+  {
+    firstName: "Emily",
+    lastName: "Chen",
+    phoneNumber: "555-123-4567",
+    likes: ["dancing", "singing", "hiking"]
+  },
+  {
+    firstName: "Daniel",
+    lastName: "Kim",
+    phoneNumber: "555-789-1234",
+    likes: ["running", "playing video games", "learning languages"]
+  }
+];
