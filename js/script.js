@@ -1044,3 +1044,411 @@ let contactList = [
     likes: ["running", "playing video games", "learning languages"]
   }
 ];
+
+function searchContacts(list, name, property){
+  for (let i = 0; i < list.length; i++){
+    if (list[i].firstName === name){
+      return `Esta es la información de ${name} que solisitaste. ${property.toUpperCase()}: ${list[i][property]}`;
+    }else if (list[i][property] === undefined){
+      return `La propiedad ${property.toUpperCase()} no existe.`;
+    }
+  }
+  return `El usuario ${name} no esta en la lista de contactos.`
+}
+/* En este código tengo un problema, si quiero que el return tenga una frase no puedo usar null coalescing operator ||, y si uso if, y el nombre es incorrecto y la propiedad tambien, el programa corta en la propiedad primero. 🤔🤔🤔 */
+
+console.log(searchContacts(contactList, "Daniel", "likes"));
+
+/* Version ChatGpt
+Una opción para solucionar esto es agregar un flag para saber si se encontró el contacto o no. Si se encontró, se puede seguir en el mismo ciclo para buscar la propiedad. Pero si no se encontró, se puede salir del ciclo con un break y retornar un mensaje indicando que el contacto no está en la lista.
+
+Aquí te muestro cómo se podría implementar esta solución:
+*/
+function searchContactsGpt(list, name, property) {
+  let contactFound = false;
+
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].firstName === name) {
+      contactFound = true;
+      if (list[i][property] !== undefined) {
+        return `Esta es la información de ${name} que solicitaste. ${property.toUpperCase()}: ${list[i][property]}`;
+      } else {
+        return `La propiedad ${property.toUpperCase()} no existe.`;
+      }
+    }
+  }
+
+  if (!contactFound) {
+    return `El usuario ${name} no está en la lista de contactos.`;
+  }
+}
+
+console.log(searchContactsGpt(contactList, "Daniel", "likes"));
+
+/* En este caso, si el contacto no se encuentra, se llega al final del ciclo sin haber encontrado el contacto y se retorna el mensaje correspondiente. Si el contacto se encuentra, se marca con contactFound = true y se busca la propiedad en el mismo ciclo. Si se encuentra la propiedad, se retorna el mensaje correspondiente. Si no se encuentra la propiedad, se retorna el mensaje indicando que la propiedad no existe. */
+
+
+
+/* Otra opción:
+Es posible anidar if en lugar de utilizar if-else. Podrías utilizar algo como lo siguiente en tu función: */
+function searchContactsGpt2(list, name, property){
+  for (let i = 0; i < list.length; i++){
+    if (list[i].firstName === name){
+      if (list[i][property] !== undefined){
+        return `Esta es la información de ${name} que solicitaste. ${property.toUpperCase()}: ${list[i][property]}`;
+      } else {
+        return `La propiedad ${property.toUpperCase()} no existe.`;
+      }
+    }
+  }
+  return `El usuario ${name} no está en la lista de contactos.`
+}
+console.log(searchContactsGpt2(contactList, "Daniel", "lis"));
+/* En este caso, si el nombre buscado no coincide con ninguno de los nombres en la lista, se retornará el mensaje "El usuario [nombre] no está en la lista de contactos". Si el nombre coincide, se chequeará si la propiedad buscada existe en el objeto de ese nombre. Si existe, se retornará un mensaje que incluye el valor de la propiedad. Si no existe, se retornará el mensaje "La propiedad [propiedad] no existe."
+
+La expresión lógica que se evalúa en un if es similar a una expresión que involucre operadores lógicos como &&, ||, etc. Lo que sucede es que en un if la expresión se evalúa de forma secuencial, por lo que cada condición se verifica por separado. Si la primera condición es falsa, entonces no se evalúa la segunda y se salta directamente al bloque de código que sigue al if. Si la primera condición es verdadera, entonces se evalúa la segunda y así sucesivamente.
+
+En cambio, si usas el operador && para combinar varias condiciones, todas se evalúan al mismo tiempo, y la expresión es verdadera solamente si todas las condiciones son verdaderas. Si alguna es falsa, entonces la expresión completa es falsa. En resumen, ambas formas permiten combinar varias condiciones, pero el uso de if es más explícito y permite verificar las condiciones una por una.
+*/
+
+// Números aleatorios
+/* Objeto Math:
+Math es un objeto incorporado en JavaScript que proporciona una serie de propiedades y métodos matemáticos estáticos para realizar cálculos y operaciones matemáticas.
+
+Entre las propiedades que se pueden encontrar en el objeto Math se encuentran Math.PI, que es una constante que representa el valor de PI, y Math.E, que es una constante que representa el número de Euler.
+
+Entre los métodos que se pueden encontrar en el objeto Math se encuentran Math.round(), que redondea un número al entero más cercano, Math.floor(), que redondea un número hacia abajo al entero más cercano, Math.max(), que devuelve el número más grande de una lista de números, Math.random() que genera un numero aleatorio del [0 al 1) no incluido el 1..
+
+Además, Math también incluye métodos para realizar cálculos trigonométricos (Math.sin(), Math.cos(), Math.tan(), etc.), operaciones exponenciales (Math.exp(), Math.log(), etc.), y otras operaciones matemáticas que se pueden ver en la página: https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Math
+
+Es importante tener en cuenta que todos los métodos y propiedades de Math son estáticos, lo que significa que se accede a ellos a través del objeto Math y no a través de una instancia de objeto Math.
+*/ 
+// Ejemplos con Math.random() y Math.floor();
+
+function randomFraction(){
+  return Math.random();
+}
+console.log(randomFraction());
+
+//Aleatirios enteros
+let intRandomNumber = Math.floor(Math.random() * 20); //genera un entero de 0 a 19.
+console.log(intRandomNumber);
+
+// Con limites inferior y superior
+function limitRandomNumbers(min, max){
+  return Math.floor(Math.random()*(max - min +1)) + min;
+}
+console.log(limitRandomNumbers(2,8));
+
+/* 
+Math.floor(Math.random()*(max - min +1)) + min; 
+
+Esta declaración es comúnmente utilizada para generar un número aleatorio dentro de un rango específico en JavaScript.
+
+Aquí se explica lo que hace cada parte de la declaración:
+
+Math.random() devuelve un número aleatorio entre 0 y 1 (no incluyendo 1).
+max y min son los límites superior e inferior del rango en el que se desea generar un número aleatorio.
+max - min + 1 calcula la cantidad de números diferentes que hay entre max y min, incluyendo ambos límites.
+Math.floor() redondea el resultado de Math.random()*(max - min +1) hacia abajo al número entero más cercano.
++ min suma el límite inferior del rango a ese número aleatorio generado para que se encuentre dentro del rango deseado.
+Entonces, en general, la declaración genera un número aleatorio entre min y max (incluyendo ambos límites). */
+
+
+/* Función parseInt()
+
+La función `parseInt()` en JavaScript se utiliza para analizar una cadena de caracteres (string) y convertir su contenido en un número entero. 
+
+La sintaxis básica de esta función es la siguiente:
+
+parseInt(cadena, base)
+
+Donde `cadena` es la cadena de caracteres que se desea convertir en número entero, y `base` es un número entero opcional que especifica la base numérica en la que se encuentra la cadena. Si no se especifica `base`, se asume que es 10.
+
+`parseInt()` analiza la cadena de caracteres de izquierda a derecha y devuelve el primer número entero que encuentra. Si la cadena no comienza con un número, `parseInt()` devuelve `NaN` (Not a Number).
+
+Esta función también puede utilizarse para convertir números en formato de cadena (string) que contienen un prefijo como `0x` (hexadecimal), `0o` (octal) o `0b` (binario) a su equivalente en base 10.
+
+Aquí te dejo un ejemplo:
+*/
+let cadena = "123";
+let numero = parseInt(cadena);
+console.log(numero); // Devuelve: 123
+
+//Ejemplo binario
+console.log(parseInt("110111", 2)); //devuelve 55, tambien se puede poner sin las comillas
+//Ejemplo hexadecimal
+console.log(parseInt("3E0A", 16)); //15882
+
+/* Operador condicional ternario - ternary operator 
+
+El operador condicional ternario en JavaScript se utiliza para simplificar la escritura de una expresión if/else en una sola línea. La sintaxis general es la siguiente: 
+
+condición ? expresión si verdadero : expresión si falso;
+
+La "condición" es una expresión que se evalúa a verdadero o falso. Si la condición es verdadera, se devuelve la "expresión si verdadero". De lo contrario, se devuelve la "expresión si falso".
+
+Por ejemplo, supongamos que tenemos dos variables llamadas "edad" y "mayorDeEdad". Queremos asignar a "mayorDeEdad" el valor "Sí" si "edad" es mayor o igual a 18, y "No" en caso contrario. Podríamos escribir el siguiente código usando el operador ternario:
+*/
+
+let edad = 20;
+let mayorDeEdad = (edad >= 18) ? "Sí" : "No";
+console.log(mayorDeEdad); // imprime "Sí"
+
+/*
+En este ejemplo, la condición es "edad >= 18", lo que evalúa a verdadero, por lo que se asigna el valor "Sí" a "mayorDeEdad". Si "edad" fuera menor que 18, se asignaría el valor "No" en su lugar. 
+
+El operador ternario puede ser una forma conveniente y legible de escribir expresiones condicionales simples en una sola línea.
+*/
+//Ejemplo de multiples operadores condicionales
+function compareNums(numA, numB){
+  return numA == numB ? "numA and numB are equal."
+    : numA > numB ? "numA is greater than numB."
+    : "numB is greater than numA."
+}
+console.log(compareNums(40, 45));
+
+/* var vs let
+Sí, claro. 
+
+En JavaScript, `var` y `let` son palabras clave utilizadas para declarar variables. Sin embargo, hay algunas diferencias clave entre ellas.
+
+La principal diferencia es el alcance de las variables. Las variables declaradas con `var` tienen un alcance de función o global, lo que significa que pueden ser accesibles fuera del bloque de código en el que se declaran. En cambio, las variables declaradas con `let` tienen un alcance de bloque, lo que significa que solo pueden ser accesibles dentro del bloque de código en el que se declaran.
+
+Además, las variables declaradas con `var` se elevan al principio de la función, lo que se conoce como "hoisting", lo que significa que se pueden acceder antes de que se declaren. Esto puede causar problemas de lógica y errores en el código. En cambio, las variables declaradas con `let` no se elevan y deben declararse antes de ser utilizadas.
+
+Por estas razones, se recomienda utilizar `let` en lugar de `var` para declarar variables en el código moderno de JavaScript.
+
+Algunos ejemplos de cómo el uso de `let` y `var` puede diferir:
+
+Ejemplo 1: 
+*/
+var number = 1;
+if (true) {
+  var number = 2;
+  console.log(number); // Output: 2
+}
+console.log(number); // Output: 2
+/*
+-Nota: si usas if (true), el bloque de código dentro del if siempre se ejecutará porque la condición siempre es verdadera, pero si usas if (false) el bloque de código dentro del if nunca se ejecutará porque la condición siempre es falsa.-
+
+En este caso, la variable `number` se declara como `var` y se asigna un valor de `1`. Dentro del bloque `if`, se declara la variable `number` nuevamente como `var` y se le asigna el valor de `2`. Al imprimir el valor de `number` dentro del bloque `if`, el resultado es `2`. Al imprimir el valor de `number` fuera del bloque `if`, el resultado es también `2`. Esto se debe a que las variables `var` tienen un alcance de función y no están limitadas por el alcance de bloque.
+
+Ejemplo 2:
+*/
+let numberLet = 1;
+if (true) {
+  let numberLet = 2;
+  console.log(number); // Output: 2
+}
+console.log(numberLet); // Output: 1
+/*
+En este ejemplo, se declara la variable `number` con `let` y se le asigna un valor de `1`. Dentro del bloque `if`, se declara la variable `number` nuevamente con `let` y se le asigna el valor de `2`. Al imprimir el valor de `number` dentro del bloque `if`, el resultado es `2`. Sin embargo, al imprimir el valor de `number` fuera del bloque `if`, el resultado es `1`. Esto se debe a que las variables `let` tienen un alcance de bloque y están limitadas por el alcance de bloque en el que se declaran.
+
+Ejemplo 3:
+*/
+function varExample() {
+  var number = 1;
+  if (true) {
+    var number = 2;
+    console.log(number); // Output: 2
+  }
+  console.log(number); // Output: 2
+}
+
+function letExample() {
+  let number = 1;
+  if (true) {
+    let number = 2;
+    console.log(number); // Output: 2
+  }
+  console.log(number); // Output: 1
+}
+
+varExample();
+letExample();
+/*
+En este ejemplo, se definen dos funciones: una que utiliza `var` y otra que utiliza `let`. Al llamar a ambas funciones, se pueden ver las diferencias en el alcance de las variables. La función `varExample()` sigue la lógica del Ejemplo 1 y la función `letExample()` sigue la lógica del Ejemplo 2. Al ejecutar ambas funciones, se puede ver cómo las variables `var` no están limitadas por el alcance de bloque y las variables `let` sí están limitadas por el alcance de bloque.
+
+En general, se recomienda usar `let` en lugar de `var` en la mayoría de los casos, ya que `let` limita el alcance de la variable al bloque en el que se declara, lo que puede ayudar a evitar errores y aumentar la claridad y legibilidad del código.
+*/
+
+/* Variables tipo conts
+
+Una variable `const` es una variable cuyo valor no puede ser reasignado una vez que ha sido inicializado. Es decir, la variable siempre tendrá el mismo valor a lo largo del programa y no se podrá cambiar en tiempo de ejecución. Es importante mencionar que aunque el valor de una variable `const` no puede ser reasignado, si se puede modificar el contenido de un objeto o arreglo que sea asignado a ella.
+
+Las variables `const` deben ser inicializadas al momento de ser declaradas, es decir, no se pueden declarar sin asignarles un valor. Además, una vez que se ha asignado un valor a una variable `const`, no se puede cambiar.
+
+El uso de variables `const` es aconsejable en situaciones donde el valor de la variable no debe ser cambiado durante la ejecución del programa. Esto ayuda a prevenir errores y a mantener el código más legible y fácil de entender.
+
+A diferencia de las variables `let` y `var`, que pueden ser reasignadas en cualquier momento, las variables `const` no pueden ser reasignadas, lo que hace que el código sea más predecible y seguro.
+
+Por supuesto, aquí te muestro algunos ejemplos de cómo declarar y usar variables `const` en JavaScript:
+*/
+// Declaración e inicialización de una variable constante
+// const PI = 3.14159;
+
+// Intento de reasignación de valor a una variable constante (generará un error)
+// PI = 3.14;
+
+// Declaración de una constante como un objeto
+// const PERSON = { name: "John", age: 30 };
+
+// Intento de reasignación de valor a una propiedad de una constante objeto (no genera error)
+// PERSON.name = "Mary";
+
+// Intento de reasignación de la constante objeto en sí misma (generará un error)
+// PERSON = { name: "Peter", age: 25 };
+
+// Declaración de una constante como un array
+// const NUMBERS = [1, 2, 3, 4, 5];
+
+// Intento de reasignación de valor a un elemento de una constante array (no genera error)
+// NUMBERS[0] = 0;
+
+// Intento de reasignación de la constante array en sí misma (generará un error)
+// NUMBERS = [6, 7, 8, 9, 10];
+/*
+En resumen, las variables `const` son variables cuyo valor no puede ser reasignado una vez que se les ha asignado un valor inicial, aunque sus propiedades o elementos sí pueden ser modificados. Esto hace que las variables `const` sean útiles para valores constantes o valores que no deben ser modificados en un programa.
+
+Es una convención común en muchos lenguajes de programación utilizar nombres en mayúsculas y separar las palabras con guiones bajos (_) para nombrar constantes. Esto ayuda a distinguir las constantes de las variables y funciones regulares y a que el código sea más legible.
+
+Aquí hay algunos ejemplos de nombres de constantes en JavaScript escritos en mayúsculas con guiones bajos:
+
+const MAX_AGE = 100;
+const PI = 3.14159;
+const API_KEY = "abcdefg12345";
+
+Como puedes ver, los nombres de las constantes son más descriptivos y significativos que las variables regulares, lo que hace que el código sea más fácil de leer y entender. Además, dado que una vez que se define una constante no puede cambiar su valor, el uso de nombres descriptivos puede ayudar a hacer más evidente su propósito en el código.
+*/
+
+/* Mutar arrays declarados con const
+
+Hay que tener en cuenta que el valor de una constatante puede cambiar, lo que no se puede es asignarle un valor nuevo, como en el siguiente ejemplo:
+*/
+const MY_ARRAY_CONST = [1, 2, 3, 4];
+//MY_ARRAY_CONST = [5, 6, 7, 8]; Esto generaria un erro.
+
+MY_ARRAY_CONST[0] = 5; // De esta forma se puede cambiar los valores de un array creado con const.
+MY_ARRAY_CONST[1] = 6;
+MY_ARRAY_CONST[2] = 7;
+MY_ARRAY_CONST[3] = 8;
+console.log(MY_ARRAY_CONST);// Cambiaron los valores del array original
+
+/* - Objeto inmutable -
+Con el metodo .freeze() podemos congelar los valores y propiedades de un objeto. Ej:
+*/
+let colors = {
+  green: "#10e04b",
+  blue: "#1b50e0",
+  black: "#000000",
+  white: "#ffffff"
+}
+
+Object.freeze(colors);
+colors.green = "#354sg5"; //No cambia el color, devuelve un error => TypeError: Cannot assign to read only property 'green' of alject '#<Object>'.
+console.log(colors);
+
+/* - Funciónes flecha - arrow finctions
+
+Las funciones flecha, también conocidas como arrow functions en inglés, son una forma más concisa de escribir funciones en JavaScript. A diferencia de las funciones regulares, las funciones flecha no tienen su propio `this`, `arguments`, `super`, o `new.target`. Además, son funciones anónimas y, por lo general, se asignan a una variable o se pasan como argumento a otra función.
+
+La sintaxis de una función flecha es la siguiente: 
+
+(param1, param2, ..., paramN) => { statements }
+
+o bien:
+
+(param1, param2, ..., paramN) => expression
+
+donde:
+
+- `param1`, `param2`, `paramN` son los parámetros de la función. Si la función no tiene parámetros, se escriben los paréntesis vacíos `()`.
+- `statements` son una serie de instrucciones ejecutadas por la función.
+- `expression` es una expresión evaluada y devuelta por la función.
+
+Por ejemplo, si queremos escribir una función flecha que calcule el doble de un número, podemos hacerlo de la siguiente manera:
+*/
+const doubleOp1 = (num) => {
+  return num * 2;
+}
+
+console.log(doubleOp1(5)); // 10
+/*
+También podemos escribir la misma función de forma más concisa como sigue:
+*/
+const doubleOp2 = num => num * 2;
+
+console.log(doubleOp2(5)); // 10
+
+/*
+En este caso, como la función sólo tiene un parámetro y una sola instrucción, podemos omitir los paréntesis y las llaves, y escribir todo en una sola línea.
+
+Las funciones flecha son especialmente útiles cuando se trata de funciones que reciben otras funciones como parámetros, ya que permiten una escritura más concisa y legible del código.
+*/
+
+/* - Valor por defecto - 
+Es un valor que se asigna por defecto a alguno de los parametros. Por ejemplo si se le pide al usuario que igrese dos parametros y el usuario ingresa solo uno, podemos usar el valor por defecto del segundo parametro.
+*/
+const INCREASE = (num, value = 1) => num + value;
+console.log(INCREASE(5)); // Como no se ingreso el segundo parametro de toma el valor de 1 para ese parametro.
+console.log(INCREASE(4, 9));
+
+/* - Operador rest -
+El operador rest (`...`) en JavaScript permite capturar un número variable de argumentos en una función y convertirlos en un array. Esto significa que, cuando se usa el operador rest en la declaración de parámetros de una función, cualquier argumento adicional que se le pase a la función será recopilado en un array dentro de la función.
+
+Por ejemplo, si se tiene la siguiente función:
+*/
+function sum(...numbers) { //también se suele usar(...args) como variable
+  let result = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    result += numbers[i];
+  }
+  return result;
+}
+
+console.log(sum(1, 2, 3, 4, 5)); // output: 15
+
+// Otro ejemplo:
+const sumArgs = (...args) => {
+  return args.reduce((a,b) => a + b, 0);
+}
+console.log(sumArgs(1,2,3,4,5)); // output: 15
+//.reduce() suma los elementos del array y retorna el resultado.
+/*
+La función `sum` tiene el operador rest `...numbers` como parámetro, lo que significa que se pueden pasar tantos argumentos como se quiera a la función. En este caso, los argumentos pasados a la función se convierten en un array llamado `numbers`. Luego, se realiza una suma de todos los números dentro de ese array y se devuelve el resultado.
+
+El operador rest también se puede usar para desestructurar arrays en otros arrays o variables, lo que permite trabajar con arrays de manera más fácil y flexible.
+
+En resumen, el operador rest es una forma poderosa y útil de trabajar con argumentos de función variables y arrays en JavaScript.
+*/
+
+/* - Operador sread -
+
+El operador spread en JavaScript es representado por los tres puntos "..." y se utiliza para descomponer un objeto en elementos individuales. Con este operador, se puede tomar una matriz o un objeto y separar sus elementos para utilizarlos en otro contexto.
+
+En el caso de una matriz, se puede utilizar el operador spread para concatenar elementos de dos o más matrices, o para pasar elementos de una matriz como argumentos para una función que acepta argumentos separados. Por ejemplo:
+
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const array3 = [...array1, ...array2]; // [1, 2, 3, 4, 5, 6]
+
+En el caso de un objeto, se puede utilizar el operador spread para combinar dos o más objetos en uno solo, o para agregar nuevas propiedades a un objeto existente. Por ejemplo:
+
+const obj1 = { a: 1, b: 2 };
+const obj2 = { c: 3, d: 4 };
+const obj3 = { ...obj1, ...obj2 }; // { a: 1, b: 2, c: 3, d: 4 }
+
+const obj4 = { ...obj1, c: 3 }; // { a: 1, b: 2, c: 3 }
+
+En resumen, el operador spread es una herramienta útil para combinar o separar elementos de matrices u objetos, lo que hace que el código sea más claro y conciso.
+*/
+// Ejemplo:
+const NUMBERS_SPREAD = [1, 2, 3];
+function sumSpread(x, y, z){
+  console.log(x);// Así podemos ver como se asignan los valores del array.
+  console.log(y);
+  console.log(z);
+  return x + y + z;
+}
+console.log(sumSpread(...NUMBERS_SPREAD));
