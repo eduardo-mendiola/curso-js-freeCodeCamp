@@ -1452,3 +1452,134 @@ function sumSpread(x, y, z){
   return x + y + z;
 }
 console.log(sumSpread(...NUMBERS_SPREAD));
+
+/* - Sintaxis de desestructuración de objetos -
+
+- La sintaxis de desestructuración de objetos es una forma de extraer valores de un objeto y asignarlos a variables en una sola línea. Esta técnica hace que el código sea más conciso y legible.
+
+- Para desestructurar un objeto, se utiliza la sintaxis de llaves `{}` y se asignan los nombres de las propiedades del objeto a las variables que se desean asignar. Por ejemplo:
+
+const person = { name: 'John', age: 30 };
+const { name, age } = person;
+console.log(name); // 'John'
+console.log(age); // 30
+
+- También es posible desestructurar objetos anidados, utilizando la misma sintaxis de llaves anidadas. Por ejemplo:
+
+const person = {
+  name: 'John',
+  age: 30,
+  address: {
+    street: '123 Main St',
+    city: 'Anytown',
+    state: 'CA'
+  }
+};
+
+const { name, address: { city } } = person;
+console.log(name); // 'John'
+console.log(city); // 'Anytown'
+
+- Otro ejemplo de objetos anidados:
+*/
+const PRONOSTICO_LOCAL = {
+  ayer: {
+    minima: 10,
+    maxima: 25
+  },
+  hoy: {
+    minima: 9,
+    maxima: 23
+  },
+  manana: {
+    minima: 12,
+    maxima: 27
+  }
+};
+const {hoy: {minima: minimaHoy, maxima: maximaHoy}} = PRONOSTICO_LOCAL;
+console.log(minimaHoy, maximaHoy);
+/*
+- Además de los objetos, también se puede utilizar la sintaxis de desestructuración con arrays. Algunos ejemplos:
+let a;
+let b;
+let c;
+
+[a, b] = [1, 2];
+console.log(a, b); // 1 2
+
+[a, b, c] = [1, 2, 3];
+console.log(a, b, c); // 1 2 3
+
+[a, b] = [1, 2, 3, 4, 5, 6]; // Se asignan los dos primeros números 
+console.log(a, b); // 1 2 
+
+- altar posiciones
+[a, b,,, c] = [1, 2, 3, 4, 5, 6]; //se colocan comillas según los espacios a saltar
+console.log(a, b, c); // 1 2 5
+
+- Intercambiar valores de variables
+a = 8;
+b = 6;
+[b, a] = [a, b];
+console.log(a, b); // 6 8
+
+
+- También se puede utilizar el operador rest `...` en la desestructuración de arrays y objetos para recoger los elementos restantes en una variable. Por ejemplo:
+
+const numbers = [1, 2, 3, 4, 5];
+const [a, b, ...rest] = numbers;
+console.log(a); // 1
+console.log(b); // 2
+console.log(rest); // [3, 4, 5]
+
+- Eliminar elementos de un array
+
+function removerElemetosArray(array){
+  let [ , , , ...nuevoArray] = array;
+  return nuevoArray;
+}
+let arrayFinal = removerElementosArray(numbers);
+console.log(arrayFinal); // [4, 5];
+
+- Otro ejemplo:
+
+const person = { name: 'John', age: 30, city: 'Anytown' };
+const { name, ...rest } = person;
+console.log(name); // 'John'
+console.log(rest); // { age: 30, city: 'Anytown' }
+
+
+- Finalmente, también es posible utilizar la sintaxis de desestructuración para pasar un objeto como argumento a una función. Esto permite que el código sea más legible y permite a los desarrolladores pasar sólo los datos que necesitan. Por ejemplo:
+
+
+function printPerson({ name, age, city }) {
+  console.log(`Name: ${name}, Age: ${age}, City: ${city}`);
+}
+const person = { name: 'John', age: 30, city: 'Anytown' };
+printPerson(person); // 'Name: John, Age: 30, City: Anytown'
+
+
+- Otro ejemplo:
+
+let nuevoPerfilCliente = {
+  nombre: "Jane Doe",
+  edad: 24,
+  nacionalidad: Argentina
+};
+
+let actualizarPerfil = ({nombre, edad, nacionalidad}) => {
+  console.log(name, edad, nacionalidad);
+}
+actualizarPerfil(nuevoPerfilCliente); // Jane Doe 24 Argentina
+
+- Otro ejemplo:
+
+let estadistica = {
+  max: 56.78,
+  media: 34.54,
+  min: -0.74
+};
+let mitad = ({max, min}) => (max + min) / 2.0;
+console.log(mitad(estadistica)); // 28.015
+
+*/
