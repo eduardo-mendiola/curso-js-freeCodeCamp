@@ -1581,5 +1581,233 @@ let estadistica = {
 };
 let mitad = ({max, min}) => (max + min) / 2.0;
 console.log(mitad(estadistica)); // 28.015
+*/
 
+
+/* - Plantillas literales -
+
+Las plantillas literales, también conocidas como templates literales o template strings en inglés, son una característica de JavaScript que permite combinar texto estático y expresiones dinámicas de una manera más concisa y legible.
+
+En lugar de concatenar strings utilizando el operador `+` o construir manualmente strings con variables, las plantillas literales nos permiten incrustar expresiones dentro de strings utilizando la sintaxis de las comillas invertidas ` `.
+
+Para utilizar una plantilla literal, se encierra el texto en comillas invertidas, y las expresiones se envuelven en `${}`. Por ejemplo:
+*/
+const nameLiteral = 'John';
+const ageLiteral = 30;
+const messageLiteral = `Hello, my name is ${nameLiteral} and I am ${ageLiteral} years old.`;
+console.log(messageLiteral); // 'Hello, my name is John and I am 30 years old.'
+/*
+Dentro de las expresiones entre `${}`, se pueden utilizar variables, operaciones matemáticas, invocar funciones, o cualquier otra expresión válida de JavaScript.
+
+Las plantillas literales también nos permiten formatear el texto de manera más legible, incluyendo saltos de línea y espacios en blanco. Por ejemplo:
+*/
+const multiLineMessage = `
+  Hello,
+  This is a multi-line
+  message.
+`;
+console.log(multiLineMessage);
+/*
+// Salida:
+// '
+//   Hello,
+//   This is a multi-line
+//   message.
+// '
+
+Además de las expresiones de interpolación `${}`, las plantillas literales también pueden incluir strings literales sin procesar utilizando la sintaxis `${variable}`. Esto se logra anteponiendo el prefijo `String.raw` a la plantilla literal. Por ejemplo:
+*/
+const rawString = String.raw`Hello\nWorld`;
+console.log(rawString); // 'Hello\nWorld'
+/*
+Las plantillas literales proporcionan una forma más conveniente y legible de trabajar con strings que contienen valores dinámicos o requerimientos de formato complejos.
+*/
+
+/* - Crear objetos de forma concisa -
+Ej:
+const personCreator = (name, age, language) => {
+  return {
+    name: name,
+    age: age,
+    language: language
+  };
+};
+console.log(personCreator("Ezequiel", 41, "español"));
+
+- Lo mismo pero mas conciso:
+
+const personCreator = (name, age, language) => ({name, age, language});
+
+console.log(personCreator("Ezequiel", 41, "español"));
+*/
+
+/* - Métodos -
+
+Se pueden declarar funciones dentro de los objetos que creamos en los programas.
+Si el valor de una propiedad es una función, se denomina método.
+
+Opcion 1:
+const person = {
+  name: "Ezequiel",
+  appear: function() {
+    return `Hola, mi nombre es ${this.name}.`; 
+  } 
+};
+console.log(person.appear());
+// this hace referencia a que se encuentra en el objeto actual.
+
+Opción 2 - Simplificado -
+const person = {
+  name: "Ezequiel",
+  appear() {return `Hola, mi nombre es ${this.name}.`;
+  }
+};
+console.log(person.appear());
+*/
+
+/* - Clases - 
+
+Claro, aquí tienes un resumen sobre las clases en JavaScript:
+
+Las clases en JavaScript son una forma de definir objetos y estructurar el código de manera orientada a objetos. Proporcionan una sintaxis más clara y concisa para crear objetos y trabajar con ellos. A continuación, se presentan algunos puntos clave sobre las clases en JavaScript:
+
+1. Declaración de una clase: Para declarar una clase, utilizamos la palabra clave `class`, seguida del nombre de la clase. Por convención, los nombres de las clases comienzan con mayúscula.
+
+2. Constructor: El método `constructor` es un método especial dentro de una clase que se ejecuta automáticamente cuando se crea una nueva instancia de la clase. Se utiliza para inicializar las propiedades del objeto.
+
+3. Propiedades y métodos: Dentro de una clase, podemos definir propiedades y métodos. Las propiedades son variables asociadas a la clase y se pueden acceder mediante la instancia de la clase. Los métodos son funciones asociadas a la clase y se utilizan para realizar acciones o manipular los datos de la instancia.
+
+4. Herencia: JavaScript admite la herencia de clases, lo que significa que una clase puede heredar propiedades y métodos de otra clase. Para lograr la herencia, utilizamos la palabra clave `extends` seguida del nombre de la clase padre.
+
+5. Instanciación de una clase: Para crear un objeto basado en una clase, utilizamos la palabra clave `new` seguida del nombre de la clase y los paréntesis. Esto crea una nueva instancia de la clase que podemos asignar a una variable y utilizar para acceder a las propiedades y métodos de la clase.
+
+6. Palabra clave `this`: Dentro de los métodos de una clase, la palabra clave `this` se refiere a la instancia actual de la clase. Se utiliza para acceder y modificar las propiedades de la instancia.
+
+Las clases en JavaScript proporcionan una forma organizada y estructurada de trabajar con objetos y permiten la reutilización de código a través de la herencia. Son una parte fundamental de la programación orientada a objetos en JavaScript y se utilizan ampliamente en el desarrollo de aplicaciones.
+
+Aquí tienes algunos ejemplos de cómo se pueden utilizar las clases en JavaScript:
+
+*/
+// Declaración de una clase
+class Persona {
+  // Constructor
+  constructor(nombre, edad) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+  // Método
+  presentarse() {
+    console.log(`Hola, mi nombre es ${this.nombre} y tengo ${this.edad} años.`);
+  }
+}
+
+// Instanciación de una clase
+const persona1 = new Persona("Juan", 25);
+const persona2 = new Persona("María", 30);
+
+// Acceso a propiedades y métodos
+console.log(persona1.nombre); // Output: "Juan"
+persona2.presentarse(); // Output: "Hola, mi nombre es María y tengo 30 años."
+/*
+
+En este ejemplo, hemos definido una clase `Persona` con un constructor que acepta el nombre y la edad como parámetros. La clase tiene un método `presentarse()` que muestra un mensaje de presentación utilizando las propiedades `nombre` y `edad` de la instancia.
+
+Luego, creamos dos instancias de la clase `Persona` y accedemos a sus propiedades y métodos utilizando la notación de punto.
+
+Aquí tienes otro ejemplo que muestra la herencia de clases:
+*/
+// Clase padre
+class Animal {
+  constructor(nombre) {
+    this.nombre = nombre;
+  }
+  
+  comer() {
+    console.log(`${this.nombre} está comiendo.`);
+  }
+}
+
+// Clase hija que hereda de Animal
+class Perro extends Animal {
+  ladrar() {
+    console.log(`${this.nombre} está ladrando.`);
+  }
+}
+
+// Instanciación de las clases
+const animal = new Animal("Animal");
+const perro = new Perro("Max");
+
+// Acceso a propiedades y métodos
+animal.comer(); // Output: "Animal está comiendo."
+perro.comer(); // Output: "Max está comiendo."
+perro.ladrar(); // Output: "Max está ladrando."
+
+/*
+En este ejemplo, tenemos una clase `Animal` que tiene un método `comer()`. Luego, creamos una clase `Perro` que hereda de `Animal` utilizando la palabra clave `extends`. La clase `Perro` tiene un método adicional `ladrar()`.
+
+Finalmente, creamos instancias de ambas clases y accedemos a sus propiedades y métodos.
+
+Estos ejemplos ilustran cómo se pueden utilizar las clases en JavaScript para crear objetos, definir comportamientos y aprovechar la herencia para reutilizar y extender funcionalidades.
+*/
+
+/* - Getters y Setters -
+
+En JavaScript, los getters y setters son funciones especiales que se utilizan para acceder y modificar los valores de propiedades de un objeto de manera controlada. Proporcionan una forma de interactuar con las propiedades de un objeto como si fueran atributos directos, pero con lógica adicional.
+
+Los getters se utilizan para obtener el valor de una propiedad y se definen utilizando la palabra clave `get` seguida del nombre del método y sin paréntesis. Por ejemplo:
+*/
+
+class Circle {
+  constructor(radius) {
+    this.radius = radius;
+  }
+
+  get area() {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+
+const circleGet = new Circle(5);
+console.log(circleGet.area); // Output: 78.53981633974483
+
+/*
+En este ejemplo, hemos definido un getter `area` en la clase `Circle` que calcula el área del círculo en función del radio. Podemos acceder a esta propiedad calculada como si fuera una propiedad directa del objeto `circle` utilizando la sintaxis de punto (`circle.area`).
+
+Los setters se utilizan para modificar el valor de una propiedad y se definen utilizando la palabra clave `set` seguida del nombre del método y con un parámetro que representa el nuevo valor. Por ejemplo:
+*/
+
+class Circle {
+  constructor(radius) {
+    this._radius = radius;
+  }
+
+  get radius() {
+    return this._radius;
+  }
+
+  set radius(newRadius) {
+    if (newRadius >= 0) {
+      this._radius = newRadius;
+    } else {
+      console.log("Invalid radius value");
+    }
+  }
+}
+
+const circle = new Circle(5);
+console.log(circle.radius); // Output: 5
+
+circle.radius = 10;
+console.log(circle.radius); // Output: 10
+
+circle.radius = -2; // Output: Invalid radius value
+console.log(circle.radius); // Output: 10 (valor no modificado)
+
+/*
+En este ejemplo, hemos definido un getter `radius` y un setter `radius` en la clase `Circle`. El setter comprueba si el nuevo radio es un valor válido (mayor o igual a cero) y lo actualiza solo si cumple con la condición.
+
+Los getters y setters nos permiten agregar lógica personalizada a la obtención y modificación de propiedades, lo que puede ser útil para validar valores, realizar cálculos adicionales o implementar restricciones de acceso.
+
+Es importante tener en cuenta que los getters y setters no son propiedades reales, sino métodos que se acceden como propiedades. Por convención, se recomienda utilizar nombres de propiedades que comiencen con un guión bajo (`_`) para almacenar los valores reales de las propiedades en una forma privada, evitando así colisiones con los nombres de los getters y setters.
 */
